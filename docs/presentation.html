@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Workshop | Kapsamlı Sunum</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="presentation.css">
+</head>
+
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="slide-nav">
+        <div class="nav-left">
+            <span class="slide-counter"><span id="currentSlide">1</span> / <span id="totalSlides">20</span></span>
+        </div>
+        <div class="nav-center">
+            <span class="presentation-title">GitHub Workshop</span>
+        </div>
+        <div class="nav-right">
+            <button class="nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button class="nav-btn" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            <button class="nav-btn" id="fullscreenBtn"><i class="fas fa-expand"></i></button>
+        </div>
+    </nav>
+
+    <!-- Slides Container -->
+    <div class="slides-container" id="slidesContainer">
+
+        <!-- SLIDE 1: Title -->
+        <section class="slide active" data-slide="1">
+            <div class="slide-content title-slide">
+                <div class="title-badge">
+                    <i class="fab fa-github"></i>
+                </div>
+                <h1>GitHub Workshop</h1>
+                <p class="subtitle">Sıfırdan Profesyonelliğe Kapsamlı Git & GitHub Eğitimi</p>
+                <div class="meta-info">
+                    <span><i class="fas fa-user"></i> Furkan Bulut</span>
+                    <span><i class="fas fa-clock"></i> ~9 Saat</span>
+                    <span><i class="fas fa-book"></i> 6 Modül</span>
+                </div>
+                <div class="example-badge">
+                    <i class="fas fa-code"></i>
+                    Örnek Proje: <strong>facebook/lexical</strong>
+                </div>
+                <p class="start-hint">
+                    <i class="fas fa-arrow-right"></i> Başlamak için sağ ok tuşuna basın veya tıklayın
+                </p>
+            </div>
+        </section>
+
+        <!-- SLIDE 2: Agenda -->
+        <section class="slide" data-slide="2">
+            <div class="slide-content">
+                <h2><i class="fas fa-list-check"></i> Bugün Neler Öğreneceğiz?</h2>
+                <div class="agenda-grid">
+                    <div class="agenda-item">
+                        <div class="agenda-icon"><i class="fas fa-rocket"></i></div>
+                        <h3>Git & GitHub Temelleri</h3>
+                        <p>Versiyon kontrol kavramları</p>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-icon"><i class="fas fa-code-branch"></i></div>
+                        <h3>Branch & Merge</h3>
+                        <p>Profesyonel iş akışı</p>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-icon"><i class="fas fa-code-pull-request"></i></div>
+                        <h3>Pull Request</h3>
+                        <p>Kod review süreci</p>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-icon"><i class="fas fa-bug"></i></div>
+                        <h3>Issues & Projects</h3>
+                        <p>Proje yönetimi</p>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-icon"><i class="fas fa-robot"></i></div>
+                        <h3>GitHub Actions</h3>
+                        <p>CI/CD otomasyon</p>
+                    </div>
+                    <div class="agenda-item">
+                        <div class="agenda-icon"><i class="fas fa-star"></i></div>
+                        <h3>Portfolyo</h3>
+                        <p>Kariyer geliştirme</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 3: Example Project Intro -->
+        <section class="slide" data-slide="3">
+            <div class="slide-content">
+                <h2><i class="fas fa-flask"></i> Örnek Projemiz</h2>
+                <div class="project-card">
+                    <div class="project-header">
+                        <img src="https://avatars.githubusercontent.com/u/69631?s=48" alt="Facebook" class="org-avatar">
+                        <div>
+                            <h3>facebook / lexical</h3>
+                            <p>Extensible text editor framework</p>
+                        </div>
+                    </div>
+                    <div class="project-stats">
+                        <div class="stat-box">
+                            <i class="fas fa-star"></i>
+                            <span class="stat-value">19.6k</span>
+                            <span class="stat-label">Stars</span>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fas fa-code-fork"></i>
+                            <span class="stat-value">1.7k</span>
+                            <span class="stat-label">Forks</span>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fas fa-users"></i>
+                            <span class="stat-value">513</span>
+                            <span class="stat-label">Contributors</span>
+                        </div>
+                        <div class="stat-box">
+                            <i class="fas fa-tag"></i>
+                            <span class="stat-value">83</span>
+                            <span class="stat-label">Releases</span>
+                        </div>
+                    </div>
+                    <div class="project-link">
+                        <a href="https://github.com/facebook/lexical" target="_blank">
+                            <i class="fab fa-github"></i> github.com/facebook/lexical
+                        </a>
+                    </div>
+                </div>
+                <p class="note">Bu eğitim boyunca tüm örnekleri bu gerçek proje üzerinden göstereceğiz.</p>
+            </div>
+        </section>
+
+        <!-- SLIDE 4: Git vs GitHub -->
+        <section class="slide" data-slide="4">
+            <div class="slide-content">
+                <h2><i class="fas fa-question-circle"></i> Git ve GitHub Aynı Şey Mi?</h2>
+                <div class="comparison-table">
+                    <div class="comparison-col git-col">
+                        <div class="col-header">
+                            <i class="fab fa-git-alt"></i>
+                            <h3>Git</h3>
+                        </div>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Versiyon kontrol sistemi</li>
+                            <li><i class="fas fa-check"></i> Bilgisayarınızda çalışır</li>
+                            <li><i class="fas fa-check"></i> İnternet gerektirmez</li>
+                            <li><i class="fas fa-check"></i> Linus Torvalds (2005)</li>
+                            <li><i class="fas fa-check"></i> Açık kaynak, ücretsiz</li>
+                        </ul>
+                    </div>
+                    <div class="vs-badge">VS</div>
+                    <div class="comparison-col github-col">
+                        <div class="col-header">
+                            <i class="fab fa-github"></i>
+                            <h3>GitHub</h3>
+                        </div>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Bulut hosting platformu</li>
+                            <li><i class="fas fa-check"></i> Web üzerinde çalışır</li>
+                            <li><i class="fas fa-check"></i> İnternet gerektirir</li>
+                            <li><i class="fas fa-check"></i> GitHub Inc. (2008)</li>
+                            <li><i class="fas fa-check"></i> Freemium model</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="analogy-box">
+                    <i class="fas fa-lightbulb"></i>
+                    <p><strong>Analoji:</strong> Git = MP3 formatı, GitHub = Spotify platformu</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 5: Repository Structure -->
+        <section class="slide" data-slide="5">
+            <div class="slide-content">
+                <h2><i class="fas fa-folder-tree"></i> Repository Yapısı</h2>
+                <p class="slide-desc">facebook/lexical repository'sinin gerçek yapısı:</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span>📁 facebook/lexical</span>
+                    </div>
+                    <pre>
+├── 📁 .github/           # GitHub özel dosyaları
+│   ├── ISSUE_TEMPLATE/   # Issue şablonları
+│   ├── workflows/        # GitHub Actions
+│   └── PULL_REQUEST_TEMPLATE.md
+├── 📁 packages/          # Kaynak kodlar
+├── 📁 examples/          # Örnek projeler
+├── 📁 scripts/           # Yardımcı scriptler
+├── 📄 README.md          # Proje tanıtımı
+├── 📄 CONTRIBUTING.md    # Katkı rehberi
+├── 📄 CODE_OF_CONDUCT.md # Davranış kuralları
+├── 📄 LICENSE            # MIT Lisansı
+├── 📄 package.json       # Bağımlılıklar
+└── 📄 .gitignore         # Git'in yoksayacağı dosyalar</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 6: Basic Git Commands -->
+        <section class="slide" data-slide="6">
+            <div class="slide-content">
+                <h2><i class="fas fa-terminal"></i> Temel Git Komutları</h2>
+                <div class="commands-grid">
+                    <div class="command-card">
+                        <code>git clone</code>
+                        <p>Repo'yu indir</p>
+                        <span class="example">git clone https://github.com/facebook/lexical.git</span>
+                    </div>
+                    <div class="command-card">
+                        <code>git status</code>
+                        <p>Durumu kontrol et</p>
+                        <span class="example">Hangi dosyalar değişti?</span>
+                    </div>
+                    <div class="command-card">
+                        <code>git add .</code>
+                        <p>Değişiklikleri hazırla</p>
+                        <span class="example">Staging area'ya ekle</span>
+                    </div>
+                    <div class="command-card">
+                        <code>git commit -m "mesaj"</code>
+                        <p>Değişiklikleri kaydet</p>
+                        <span class="example">Snapshot oluştur</span>
+                    </div>
+                    <div class="command-card">
+                        <code>git push</code>
+                        <p>GitHub'a gönder</p>
+                        <span class="example">Uzak repo'ya yükle</span>
+                    </div>
+                    <div class="command-card">
+                        <code>git pull</code>
+                        <p>GitHub'dan çek</p>
+                        <span class="example">Güncellemeleri al</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 7: Conventional Commits -->
+        <section class="slide" data-slide="7">
+            <div class="slide-content">
+                <h2><i class="fas fa-message"></i> Conventional Commits</h2>
+                <p class="slide-desc">Profesyonel commit mesajı formatı:</p>
+                <div class="commit-format">
+                    <code>&lt;type&gt;(&lt;scope&gt;): &lt;description&gt;</code>
+                </div>
+                <div class="commit-types">
+                    <div class="type-badge feat">feat</div>
+                    <div class="type-badge fix">fix</div>
+                    <div class="type-badge docs">docs</div>
+                    <div class="type-badge style">style</div>
+                    <div class="type-badge refactor">refactor</div>
+                    <div class="type-badge test">test</div>
+                    <div class="type-badge chore">chore</div>
+                </div>
+                <div class="real-example">
+                    <h4><i class="fas fa-code"></i> Lexical'dan Gerçek Örnekler:</h4>
+                    <div class="commit-list">
+                        <div class="commit-item">
+                            <span class="type feat">feat</span>
+                            <span>feat(editor): add markdown export support</span>
+                        </div>
+                        <div class="commit-item">
+                            <span class="type fix">fix</span>
+                            <span>fix(selection): resolve cursor position bug</span>
+                        </div>
+                        <div class="commit-item">
+                            <span class="type docs">docs</span>
+                            <span>docs: update contributing guidelines</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 8: Branching -->
+        <section class="slide" data-slide="8">
+            <div class="slide-content">
+                <h2><i class="fas fa-code-branch"></i> Branch Stratejisi</h2>
+                <div class="branch-diagram">
+                    <div class="branch main-branch">
+                        <span class="branch-name">main</span>
+                        <div class="branch-line"></div>
+                    </div>
+                    <div class="branch feature-branch">
+                        <span class="branch-name">feature/rich-text</span>
+                        <div class="branch-line"></div>
+                    </div>
+                    <div class="branch bugfix-branch">
+                        <span class="branch-name">bugfix/cursor-fix</span>
+                        <div class="branch-line"></div>
+                    </div>
+                </div>
+                <div class="branch-commands">
+                    <div class="cmd">
+                        <code>git checkout -b feature/yeni-ozellik</code>
+                        <span>Yeni branch oluştur ve geç</span>
+                    </div>
+                    <div class="cmd">
+                        <code>git checkout main</code>
+                        <span>main branch'a geri dön</span>
+                    </div>
+                    <div class="cmd">
+                        <code>git merge feature/yeni-ozellik</code>
+                        <span>Branch'ı birleştir</span>
+                    </div>
+                </div>
+                <div class="warning-box">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Altın Kural:</strong> Asla main branch'ında direkt çalışmayın!
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 9: Issues -->
+        <section class="slide" data-slide="9">
+            <div class="slide-content">
+                <h2><i class="fas fa-circle-exclamation"></i> GitHub Issues</h2>
+                <p class="slide-desc">
+                    <a href="https://github.com/facebook/lexical/issues" target="_blank">
+                        <i class="fas fa-external-link"></i> github.com/facebook/lexical/issues
+                    </a>
+                </p>
+                <div class="issue-example">
+                    <div class="issue-header">
+                        <span class="issue-state open"><i class="fas fa-circle-dot"></i> Open</span>
+                        <span class="issue-number">#5847</span>
+                    </div>
+                    <h4 class="issue-title">Bug: Selection lost when clicking outside editor</h4>
+                    <div class="issue-meta">
+                        <span><i class="fas fa-user"></i> @contributor123</span>
+                        <span><i class="fas fa-clock"></i> 2 days ago</span>
+                    </div>
+                    <div class="issue-labels">
+                        <span class="label bug">🐛 bug</span>
+                        <span class="label priority">priority: high</span>
+                        <span class="label help">good first issue</span>
+                    </div>
+                </div>
+                <div class="labels-guide">
+                    <h4>Yaygın Label'lar:</h4>
+                    <div class="label-list">
+                        <span class="label bug">bug</span>
+                        <span class="label feature">enhancement</span>
+                        <span class="label docs">documentation</span>
+                        <span class="label help">good first issue</span>
+                        <span class="label wontfix">wontfix</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 10: Pull Requests -->
+        <section class="slide" data-slide="10">
+            <div class="slide-content">
+                <h2><i class="fas fa-code-pull-request"></i> Pull Request (PR)</h2>
+                <p class="slide-desc">
+                    <a href="https://github.com/facebook/lexical/pulls" target="_blank">
+                        <i class="fas fa-external-link"></i> github.com/facebook/lexical/pulls
+                    </a>
+                </p>
+                <div class="pr-example">
+                    <div class="pr-header">
+                        <span class="pr-state merged"><i class="fas fa-code-merge"></i> Merged</span>
+                        <span class="pr-number">#6201</span>
+                    </div>
+                    <h4 class="pr-title">feat(core): Add support for custom node serialization</h4>
+                    <div class="pr-meta">
+                        <span><i class="fas fa-code-branch"></i> feature/serialization → main</span>
+                        <span><i class="fas fa-comments"></i> 12 comments</span>
+                        <span><i class="fas fa-check"></i> 3 reviews</span>
+                    </div>
+                    <div class="pr-checks">
+                        <span class="check passed"><i class="fas fa-check-circle"></i> CI passed</span>
+                        <span class="check passed"><i class="fas fa-check-circle"></i> Tests passed</span>
+                        <span class="check passed"><i class="fas fa-check-circle"></i> 2 approvals</span>
+                    </div>
+                </div>
+                <div class="pr-states">
+                    <span class="state open"><i class="fas fa-circle-dot"></i> Open</span>
+                    <span class="state merged"><i class="fas fa-code-merge"></i> Merged</span>
+                    <span class="state closed"><i class="fas fa-circle-xmark"></i> Closed</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 11: PR Workflow -->
+        <section class="slide" data-slide="11">
+            <div class="slide-content">
+                <h2><i class="fas fa-route"></i> PR Workflow</h2>
+                <div class="workflow-steps">
+                    <div class="workflow-step">
+                        <div class="step-num">1</div>
+                        <div class="step-content">
+                            <h4>Fork</h4>
+                            <p>Projeyi kendi hesabınıza kopyalayın</p>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="workflow-step">
+                        <div class="step-num">2</div>
+                        <div class="step-content">
+                            <h4>Clone</h4>
+                            <p>Fork'u bilgisayarınıza indirin</p>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="workflow-step">
+                        <div class="step-num">3</div>
+                        <div class="step-content">
+                            <h4>Branch</h4>
+                            <p>Yeni branch oluşturun</p>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="workflow-step">
+                        <div class="step-num">4</div>
+                        <div class="step-content">
+                            <h4>Commit</h4>
+                            <p>Değişiklikleri kaydedin</p>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="workflow-step">
+                        <div class="step-num">5</div>
+                        <div class="step-content">
+                            <h4>Push</h4>
+                            <p>Fork'unuza gönderin</p>
+                        </div>
+                    </div>
+                    <div class="workflow-arrow"><i class="fas fa-arrow-right"></i></div>
+                    <div class="workflow-step">
+                        <div class="step-num">6</div>
+                        <div class="step-content">
+                            <h4>PR</h4>
+                            <p>Pull Request açın</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 12: Code Review -->
+        <section class="slide" data-slide="12">
+            <div class="slide-content">
+                <h2><i class="fas fa-magnifying-glass-chart"></i> Code Review</h2>
+                <div class="review-demo">
+                    <div class="review-file">
+                        <div class="file-header">
+                            <i class="fas fa-file-code"></i> packages/lexical/src/LexicalEditor.ts
+                        </div>
+                        <div class="diff-view">
+                            <div class="diff-line removed">- const oldValue = node.getValue();</div>
+                            <div class="diff-line added">+ const oldValue = node.getValue() ?? '';</div>
+                        </div>
+                        <div class="review-comment">
+                            <div class="comment-header">
+                                <img src="https://avatars.githubusercontent.com/u/1?s=32" class="reviewer-avatar">
+                                <strong>@senior-dev</strong>
+                                <span class="badge approved">Approved</span>
+                            </div>
+                            <p>LGTM! Null check eklenmesi kritik bir bug'ı çözüyor. 👍</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-types">
+                    <span class="review-type approve"><i class="fas fa-check"></i> Approve</span>
+                    <span class="review-type comment"><i class="fas fa-comment"></i> Comment</span>
+                    <span class="review-type changes"><i class="fas fa-times"></i> Request Changes</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 13: GitHub Actions -->
+        <section class="slide" data-slide="13">
+            <div class="slide-content">
+                <h2><i class="fas fa-gear"></i> GitHub Actions (CI/CD)</h2>
+                <p class="slide-desc">Otomatik test ve deployment</p>
+                <div class="actions-demo">
+                    <div class="workflow-file">
+                        <div class="file-header">
+                            <i class="fas fa-file-code"></i> .github/workflows/ci.yml
+                        </div>
+                        <pre>
+<span class="key">name:</span> CI
+
+<span class="key">on:</span>
+  <span class="key">push:</span>
+    <span class="key">branches:</span> [main]
+  <span class="key">pull_request:</span>
+    <span class="key">branches:</span> [main]
+
+<span class="key">jobs:</span>
+  <span class="key">test:</span>
+    <span class="key">runs-on:</span> ubuntu-latest
+    <span class="key">steps:</span>
+      - <span class="key">uses:</span> actions/checkout@v4
+      - <span class="key">run:</span> npm ci
+      - <span class="key">run:</span> npm test</pre>
+                    </div>
+                    <div class="actions-result">
+                        <div class="action-run success">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>CI</strong>
+                                <span>All checks passed • 2m 34s</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 14: Wiki & Documentation -->
+        <section class="slide" data-slide="14">
+            <div class="slide-content">
+                <h2><i class="fas fa-book"></i> Wiki & Dokümantasyon</h2>
+                <div class="docs-grid">
+                    <div class="doc-card">
+                        <i class="fas fa-book-open"></i>
+                        <h4>README.md</h4>
+                        <p>Proje tanıtımı, kurulum, kullanım</p>
+                    </div>
+                    <div class="doc-card">
+                        <i class="fas fa-hands-helping"></i>
+                        <h4>CONTRIBUTING.md</h4>
+                        <p>Katkıda bulunma rehberi</p>
+                    </div>
+                    <div class="doc-card">
+                        <i class="fas fa-heart"></i>
+                        <h4>CODE_OF_CONDUCT.md</h4>
+                        <p>Topluluk davranış kuralları</p>
+                    </div>
+                    <div class="doc-card">
+                        <i class="fas fa-book"></i>
+                        <h4>Wiki</h4>
+                        <p>Detaylı dokümantasyon</p>
+                    </div>
+                </div>
+                <div class="lexical-docs">
+                    <a href="https://lexical.dev/docs" target="_blank" class="doc-link">
+                        <i class="fas fa-external-link"></i> lexical.dev/docs
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 15: Projects & Kanban -->
+        <section class="slide" data-slide="15">
+            <div class="slide-content">
+                <h2><i class="fas fa-kanban"></i> GitHub Projects</h2>
+                <p class="slide-desc">Kanban tarzı proje yönetimi</p>
+                <div class="kanban-demo">
+                    <div class="kanban-column">
+                        <div class="column-header todo">
+                            <i class="fas fa-circle"></i> Todo
+                            <span class="count">3</span>
+                        </div>
+                        <div class="kanban-card">Markdown export</div>
+                        <div class="kanban-card">Mobile support</div>
+                        <div class="kanban-card">Dark mode</div>
+                    </div>
+                    <div class="kanban-column">
+                        <div class="column-header progress">
+                            <i class="fas fa-spinner"></i> In Progress
+                            <span class="count">2</span>
+                        </div>
+                        <div class="kanban-card active">Table plugin</div>
+                        <div class="kanban-card active">RTL support</div>
+                    </div>
+                    <div class="kanban-column">
+                        <div class="column-header done">
+                            <i class="fas fa-check-circle"></i> Done
+                            <span class="count">4</span>
+                        </div>
+                        <div class="kanban-card done">Image upload</div>
+                        <div class="kanban-card done">Code blocks</div>
+                        <div class="kanban-card done">Undo/Redo</div>
+                        <div class="kanban-card done">Copy/Paste</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 16: Releases & Tags -->
+        <section class="slide" data-slide="16">
+            <div class="slide-content">
+                <h2><i class="fas fa-tag"></i> Releases & Versioning</h2>
+                <div class="releases-demo">
+                    <div class="release-item latest">
+                        <div class="release-badge">Latest</div>
+                        <h4>v0.39.0</h4>
+                        <span class="release-date">Dec 10, 2025</span>
+                    </div>
+                    <div class="release-item">
+                        <h4>v0.38.0</h4>
+                        <span class="release-date">Nov 28, 2025</span>
+                    </div>
+                    <div class="release-item">
+                        <h4>v0.37.0</h4>
+                        <span class="release-date">Nov 15, 2025</span>
+                    </div>
+                </div>
+                <div class="semver-box">
+                    <h4>Semantic Versioning</h4>
+                    <div class="semver-format">
+                        <span class="major">MAJOR</span>.<span class="minor">MINOR</span>.<span
+                            class="patch">PATCH</span>
+                    </div>
+                    <p>
+                        <strong>MAJOR:</strong> Breaking changes<br>
+                        <strong>MINOR:</strong> Yeni özellikler<br>
+                        <strong>PATCH:</strong> Bug düzeltmeleri
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 17: Profile README -->
+        <section class="slide" data-slide="17">
+            <div class="slide-content">
+                <h2><i class="fas fa-id-card"></i> GitHub Profile README</h2>
+                <div class="profile-demo">
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <img src="https://avatars.githubusercontent.com/u/1?s=80" class="profile-avatar">
+                            <div>
+                                <h3>👋 Merhaba, Ben Furkan!</h3>
+                                <p>Full Stack Developer | Open Source Contributor</p>
+                            </div>
+                        </div>
+                        <div class="profile-badges">
+                            <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black"
+                                alt="JS">
+                            <img src="https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=black" alt="React">
+                            <img src="https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white"
+                                alt="Node">
+                        </div>
+                        <div class="profile-stats">
+                            <img src="https://github-readme-stats.vercel.app/api?username=furk4nbulut&show_icons=true&theme=dark&hide_border=true&bg_color=0d1117"
+                                alt="Stats" style="max-width: 100%; height: auto;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 18: GitHub Pages -->
+        <section class="slide" data-slide="18">
+            <div class="slide-content">
+                <h2><i class="fas fa-globe"></i> GitHub Pages</h2>
+                <p class="slide-desc">Ücretsiz statik site hosting</p>
+                <div class="pages-demo">
+                    <div class="pages-url">
+                        <i class="fas fa-link"></i>
+                        <code>https://username.github.io</code>
+                    </div>
+                    <div class="pages-steps">
+                        <div class="page-step">
+                            <span class="num">1</span>
+                            <span>Repo oluştur: <code>username.github.io</code></span>
+                        </div>
+                        <div class="page-step">
+                            <span class="num">2</span>
+                            <span>index.html ekle</span>
+                        </div>
+                        <div class="page-step">
+                            <span class="num">3</span>
+                            <span>Push et</span>
+                        </div>
+                        <div class="page-step">
+                            <span class="num">4</span>
+                            <span>Site yayında! 🎉</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="pages-example">
+                    <a href="https://lexical.dev" target="_blank">
+                        <i class="fas fa-external-link"></i> lexical.dev (Lexical'ın sitesi)
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 19: Resources -->
+        <section class="slide" data-slide="19">
+            <div class="slide-content">
+                <h2><i class="fas fa-bookmark"></i> Faydalı Kaynaklar</h2>
+                <div class="resources-grid">
+                    <a href="https://docs.github.com" target="_blank" class="resource-card">
+                        <i class="fas fa-book"></i>
+                        <h4>GitHub Docs</h4>
+                        <p>Resmi dokümantasyon</p>
+                    </a>
+                    <a href="https://git-scm.com/book/tr" target="_blank" class="resource-card">
+                        <i class="fas fa-book-open"></i>
+                        <h4>Git Book (TR)</h4>
+                        <p>Türkçe Git kitabı</p>
+                    </a>
+                    <a href="https://skills.github.com" target="_blank" class="resource-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>GitHub Skills</h4>
+                        <p>İnteraktif eğitimler</p>
+                    </a>
+                    <a href="https://education.github.com/pack" target="_blank" class="resource-card">
+                        <i class="fas fa-gift"></i>
+                        <h4>Student Pack</h4>
+                        <p>Öğrenci avantajları</p>
+                    </a>
+                    <a href="https://conventionalcommits.org" target="_blank" class="resource-card">
+                        <i class="fas fa-message"></i>
+                        <h4>Conventional Commits</h4>
+                        <p>Commit standartları</p>
+                    </a>
+                    <a href="index.html" target="_blank" class="resource-card highlight">
+                        <i class="fas fa-book-reader"></i>
+                        <h4>Wiki Modülleri</h4>
+                        <p>Detaylı eğitim içeriği</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SLIDE 20: Thank You -->
+        <section class="slide" data-slide="20">
+            <div class="slide-content title-slide">
+                <div class="title-badge success">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h1>Teşekkürler!</h1>
+                <p class="subtitle">Sorularınız için hazırım 🙋‍♂️</p>
+                <div class="contact-links">
+                    <a href="https://github.com/Furk4nBulut" target="_blank">
+                        <i class="fab fa-github"></i> @Furk4nBulut
+                    </a>
+                    <a href="https://linkedin.com/in/furk4nbulut" target="_blank">
+                        <i class="fab fa-linkedin"></i> /furk4nbulut
+                    </a>
+                    <a href="https://twitter.com/furaborat" target="_blank">
+                        <i class="fab fa-twitter"></i> @furaborat
+                    </a>
+                </div>
+                <div class="final-links">
+                    <a href="index.html" class="btn-wiki">
+                        <i class="fas fa-book"></i> Wiki'ye Git
+                    </a>
+                    <a href="https://github.com/Furk4nBulut/Github-Workshop" target="_blank" class="btn-repo">
+                        <i class="fab fa-github"></i> Repo'yu İncele
+                    </a>
+                </div>
+                <p class="footer-text">
+                    <i class="fas fa-star"></i> Bu sunum yardımcı olduysa repo'ya yıldız vermeyi unutmayın!
+                </p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Keyboard shortcuts hint -->
+    <div class="keyboard-hint" id="keyboardHint">
+        <span><kbd>←</kbd> <kbd>→</kbd> Gezin</span>
+        <span><kbd>F</kbd> Tam ekran</span>
+        <span><kbd>Esc</kbd> Çık</span>
+    </div>
+
+    <script src="presentation.js"></script>
+</body>
+
+</html>

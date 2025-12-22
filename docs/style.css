@@ -660,6 +660,89 @@ tr:hover td {
     margin-bottom: 4px;
 }
 
+/* Enhanced Wiki Footer */
+.wiki-footer {
+    text-align: left;
+    padding: 32px 24px 24px;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.footer-section h4 {
+    font-size: 0.9rem;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.footer-links-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+}
+
+.footer-links-inline a {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    transition: var(--transition);
+}
+
+.footer-links-inline a:hover {
+    color: var(--primary-light);
+}
+
+.footer-social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.footer-social-icons a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.footer-social-icons a:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.footer-bottom-wiki {
+    text-align: center;
+}
+
+.footer-bottom-wiki p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.footer-bottom-wiki a {
+    color: var(--text-secondary);
+}
+
+.footer-bottom-wiki a:hover {
+    color: var(--primary-light);
+}
+
+
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
     .sidebar {

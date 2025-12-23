@@ -58,11 +58,20 @@ jobs:
               const studentMatch = logContent.match(/Problem[1-4]_(\d{9})\.cs/);
               const scoreMatch = logContent.match(/TOPLAM SONUÇ:\s*(\d+(?:\.\d+)?)\s*\/\s*100/);
               
+              const p1Match = logContent.match(/Problem 1\s+(\d+(?:\.\d+)?)\/25/);
+              const p2Match = logContent.match(/Problem 2\s+(\d+(?:\.\d+)?)\/25/);
+              const p3Match = logContent.match(/Problem 3\s+(\d+(?:\.\d+)?)\/25/);
+              const p4Match = logContent.match(/Problem 4\s+(\d+(?:\.\d+)?)\/25/);
+
               if (studentMatch && scoreMatch) {
                 return {
                   found: true,
                   studentNo: studentMatch[1],
-                  totalScore: parseFloat(scoreMatch[1])
+                  totalScore: parseFloat(scoreMatch[1]),
+                  p1: p1Match ? parseFloat(p1Match[1]) : 0,
+                  p2: p2Match ? parseFloat(p2Match[1]) : 0,
+                  p3: p3Match ? parseFloat(p3Match[1]) : 0,
+                  p4: p4Match ? parseFloat(p4Match[1]) : 0
                 };
               }
             } catch (e) {
@@ -85,13 +94,18 @@ jobs:
           # Extract values using jq
           STUDENT_NO=$(echo "$RESULT" | jq -r '.studentNo // empty')
           TOTAL_SCORE=$(echo "$RESULT" | jq -r '.totalScore // 0')
+          P1_SCORE=$(echo "$RESULT" | jq -r '.p1 // 0')
+          P2_SCORE=$(echo "$RESULT" | jq -r '.p2 // 0')
+          P3_SCORE=$(echo "$RESULT" | jq -r '.p3 // 0')
+          P4_SCORE=$(echo "$RESULT" | jq -r '.p4 // 0')
           
           if [ -z "$STUDENT_NO" ]; then
             echo "No student number found"
             exit 0
           fi
           
-          echo "Updating scores for student: $STUDENT_NO with score: $TOTAL_SCORE"
+          echo "Updating scores for student: $STUDENT_NO"
+          echo "Total: $TOTAL_SCORE (P1: $P1_SCORE, P2: $P2_SCORE, P3: $P3_SCORE, P4: $P4_SCORE)"
           
           # Update scores.json
           SCORES_FILE="docs/data/scores.json"
@@ -109,13 +123,21 @@ jobs:
           
           if [ -n "$EXISTING" ]; then
             # Update existing student
-            UPDATED=$(echo "$CURRENT" | jq --arg sno "$STUDENT_NO" --arg score "$TOTAL_SCORE" --arg ts "$TIMESTAMP" '
+            UPDATED=$(echo "$CURRENT" | jq --arg sno "$STUDENT_NO" --arg score "$TOTAL_SCORE" --arg p1 "$P1_SCORE" --arg p2 "$P2_SCORE" --arg p3 "$P3_SCORE" --arg p4 "$P4_SCORE" --arg ts "$TIMESTAMP" '
               .lastUpdated = $ts |
-              .students = [.students[] | if .studentNo == $sno then .total = ($score | tonumber) | .lastSubmission = $ts else . end]
+              .students = [.students[] | if .studentNo == $sno then 
+                .total = ($score | tonumber) | 
+                .scores.problem1 = ($p1 | tonumber) |
+                .scores.problem2 = ($p2 | tonumber) |
+                .scores.problem3 = ($p3 | tonumber) |
+                .scores.problem4 = ($p4 | tonumber) |
+                .lastSubmission = $ts 
+              else . end]
             ')
           else
             # Add new student
-            NEW_STUDENT="{\"studentNo\":\"$STUDENT_NO\",\"scores\":{\"problem1\":0,\"problem2\":0,\"problem3\":0,\"problem4\":0},\"total\":$TOTAL_SCORE,\"lastSubmission\":\"$TIMESTAMP\"}"
+            NEW_STUDENT="{\"studentNo\":\"$STUDENT_NO\",\"scores\":{\"problem1\":$P1_SCORE,\"problem2\":$P2_SCORE,\"problem3\":$P3_SCORE,\"problem4\":$P4_SCORE},\"total\":$TOTAL_SCORE,\"lastSubmission\":\"$TIMESTAMP\"}"
+
             UPDATED=$(echo "$CURRENT" | jq --argjson student "$NEW_STUDENT" --arg ts "$TIMESTAMP" '
               .lastUpdated = $ts |
               .students += [$student] |

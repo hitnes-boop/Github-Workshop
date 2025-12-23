@@ -98,6 +98,7 @@ jobs:
             echo "valid=true" >> $GITHUB_OUTPUT
           fi
 
+
       - name: Run All Tests
         id: run-tests
         if: steps.changed-files.outputs.any_changed == 'true' && steps.validate-files.outputs.valid == 'true'
@@ -107,6 +108,12 @@ jobs:
           
           ALL_PASSED=true
           TOTAL_SCORE=0
+          
+          # Track which problems are submitted
+          SUBMITTED_P1=false
+          SUBMITTED_P2=false
+          SUBMITTED_P3=false
+          SUBMITTED_P4=false
           
           # Create comment body file
           echo "## 📊 C# Ödev Test Sonuçları" > /tmp/comment_body.md
@@ -124,6 +131,9 @@ jobs:
               problem_num="${BASH_REMATCH[1]}"
               PROBLEM_DIR="homeworks/csharp-fundamentals/problem-${problem_num}"
               filename=$(basename "$file")
+              
+              # Mark problem as submitted
+              eval "SUBMITTED_P${problem_num}=true"
               
               echo ""
               echo "╔══════════════════════════════════════════════════╗"
@@ -185,9 +195,40 @@ jobs:
             fi
           done <<< "${{ steps.validate-files.outputs.valid_files }}"
           
+          # Add missing problems to table
+          MISSING_PROBLEMS=""
+          if [ "$SUBMITTED_P1" = false ]; then
+            echo "| Problem 1 | 0/25 | ⚠️ Eksik |" >> /tmp/comment_body.md
+            MISSING_PROBLEMS="${MISSING_PROBLEMS}Problem1, "
+            ALL_PASSED=false
+          fi
+          if [ "$SUBMITTED_P2" = false ]; then
+            echo "| Problem 2 | 0/25 | ⚠️ Eksik |" >> /tmp/comment_body.md
+            MISSING_PROBLEMS="${MISSING_PROBLEMS}Problem2, "
+            ALL_PASSED=false
+          fi
+          if [ "$SUBMITTED_P3" = false ]; then
+            echo "| Problem 3 | 0/25 | ⚠️ Eksik |" >> /tmp/comment_body.md
+            MISSING_PROBLEMS="${MISSING_PROBLEMS}Problem3, "
+            ALL_PASSED=false
+          fi
+          if [ "$SUBMITTED_P4" = false ]; then
+            echo "| Problem 4 | 0/25 | ⚠️ Eksik |" >> /tmp/comment_body.md
+            MISSING_PROBLEMS="${MISSING_PROBLEMS}Problem4, "
+            ALL_PASSED=false
+          fi
+          
           echo "" >> /tmp/comment_body.md
           echo "**Toplam Puan:** $TOTAL_SCORE / 100" >> /tmp/comment_body.md
           echo "" >> /tmp/comment_body.md
+          
+          # Add warning about missing problems
+          if [ -n "$MISSING_PROBLEMS" ]; then
+            MISSING_PROBLEMS="${MISSING_PROBLEMS%, }"
+            echo "> ⚠️ **Eksik Dosyalar:** $MISSING_PROBLEMS" >> /tmp/comment_body.md
+            echo "> Lütfen eksik problemleri \`submissions/\` klasörüne ekleyin." >> /tmp/comment_body.md
+            echo "" >> /tmp/comment_body.md
+          fi
           
           if [ "$ALL_PASSED" = true ]; then
             echo "---" >> /tmp/comment_body.md
@@ -214,6 +255,7 @@ jobs:
           echo "total_score=$TOTAL_SCORE" >> $GITHUB_OUTPUT
           echo "all_passed=$ALL_PASSED" >> $GITHUB_OUTPUT
 
+
       - name: Generate Job Summary
         if: always() && steps.changed-files.outputs.any_changed == 'true'
         run: |
@@ -238,6 +280,7 @@ jobs:
         if: always() && steps.changed-files.outputs.any_changed == 'true' && steps.validate-files.outputs.valid == 'true' && steps.run-tests.outputs.all_passed == 'true'
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
             const commentBody = fs.readFileSync('/tmp/comment_body.md', 'utf8');
@@ -253,6 +296,7 @@ jobs:
         if: always() && steps.changed-files.outputs.any_changed == 'true' && steps.validate-files.outputs.valid == 'false'
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const invalidFiles = process.env.INVALID_FILES;
             
@@ -282,6 +326,7 @@ jobs:
         if: always() && steps.changed-files.outputs.any_changed == 'true' && steps.validate-files.outputs.valid == 'true' && steps.run-tests.outputs.all_passed == 'false'
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const fs = require('fs');
             const commentBody = fs.readFileSync('/tmp/comment_body.md', 'utf8');
